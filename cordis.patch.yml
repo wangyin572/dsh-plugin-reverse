@@ -1,0 +1,7 @@
+# dsh-plugin-reverse 的组合包层：向 profile 插入本插件的行。
+#
+# id   —— 稳定句柄，供用户与其他配置层定位；发布后不要修改。
+# name —— 模块名，由 DSH 从 profile 的 node_modules 解析。
+- insert:
+    - id: reverse-toolkit
+      name: 'dsh-plugin-reverse'

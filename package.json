@@ -1,0 +1,80 @@
+{
+  "name": "dsh-plugin-reverse",
+  "version": "0.1.0",
+  "description": "DSH plugin: JS reverse-engineering toolkit - host-env stripping for static deobfuscation and crypto verification.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "reverse-engineering",
+    "deobfuscation",
+    "javascript",
+    "hook",
+    "crypto"
+  ],
+  "homepage": "https://github.com/wangyin572/dsh-plugin-reverse#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangyin572/dsh-plugin-reverse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wangyin572/dsh-plugin-reverse/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./core": {
+      "types": "./lib/types/core/index.d.ts",
+      "default": "./lib/core/index.js"
+    },
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/types/**/*.d.ts",
+    "cordis.patch.yml",
+    "docs/**/*.md"
+  ],
+  "engines": {
+    "node": ">=24",
+    "dsh": ">=0.2.0-rc.2 <0.3.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/dsh-tools": ">=0.2.0-rc.2 <0.3.0",
+    "@deepseek-ai/schemastery": "~3.18.4"
+  },
+  "dependencies": {
+    "acorn": "^8.14.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run check",
+    "test": "node --test \"test/*.test.mjs\"",
+    "check": "npm run build && npm test",
+    "clean": "rm -rf lib",
+    "verify:integration": "sh verify/profile-integration.sh",
+    "verify:all": "npm run check && npm run verify:integration"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.0.4",
+    "@deepseek-ai/dsh-system-prompt": "0.2.0-rc.2",
+    "@deepseek-ai/dsh-tools": "0.2.0-rc.2",
+    "@deepseek-ai/schemastery": "3.18.4",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}
